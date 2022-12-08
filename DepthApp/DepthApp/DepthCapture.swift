@@ -32,6 +32,12 @@ class DepthCapture {
     func reset() {
         frameCount = 0
         outputURL = nil
+        
+        if self.dstBuffer != nil {
+            self.dstBuffer!.deallocate()
+            self.dstBuffer = nil
+        }
+        
         if self.compresserPtr != nil {
             //free(compresserPtr!.pointee.dst_ptr)
             compression_stream_destroy(self.compresserPtr!)
